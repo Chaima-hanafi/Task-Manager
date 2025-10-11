@@ -8,4 +8,4 @@ class Task {
         this.deadline =deadline
     };
 }
-module.exports = { Task, tasks };
+module.exports = { Task, tasks }; 

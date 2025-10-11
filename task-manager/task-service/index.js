@@ -7,4 +7,5 @@ const port = 3002;
 app.use(express.json);
 
 app.use('/tasks',taskRoutes);
-app.listen(port, () =>{ console.log("task service running on port "+ port)});
+
+app.listen(port, () => { console.log("task service running on port "+ port)});
