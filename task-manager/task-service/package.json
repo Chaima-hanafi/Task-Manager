@@ -1,0 +1,15 @@
+{
+  "name": "task-service",
+  "version": "1.0.0",
+  "description": "\"the task service along side\"",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ayoub_Hafidi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
