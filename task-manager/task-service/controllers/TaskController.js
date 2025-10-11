@@ -1,5 +1,10 @@
 import {tasks, Task} from './..models/Task.js';
 
-exports.createTask = async (req, res) =>{
-    
+
+exports.createTask =  (req, res) => {
+    const task = req.body;
 }
+exports.listAllTaskByUser = () => {
+
+}
+exports.deleteTask = () => {}
