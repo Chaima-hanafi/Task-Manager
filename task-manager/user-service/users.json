@@ -8,5 +8,10 @@
     "id": "eb35c5da-ed88-4501-ba6e-5afde2afd105",
     "email": "ayoub@example.com",
     "password": "$2b$10$Ea3FCCS49/r09rZ6NpBJJusClm.BuycTMRbCps4VM9gStL8Q7wy6y"
+  },
+  {
+    "id": "0bc86c0d-c485-4d97-8144-27089661d1dd",
+    "email": "fman9383@gmail.com",
+    "password": "$2b$10$QzFEtxM6eGaY9VVRjJielOT7w1LyYfcq7Ax7KZyKmUcDAoadfx.6e"
   }
 ]
