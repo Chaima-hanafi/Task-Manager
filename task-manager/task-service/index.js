@@ -1,11 +1,15 @@
-import express from 'express';
-import taskRoutes from './routes/TaskRoutes.js';
+import express from "express";
+import bodyParser from "body-parser";
+import taskRoutes from "./routes/taskRoutes.js";
 
 const app = express();
-const port = 3002;
+const PORT = 4001;
+app.use(bodyParser.json());
+app.use(express.json());
 
-app.use(express.json);
+// Routes
+app.use("/tasks", taskRoutes);
 
-app.use('/tasks',taskRoutes);
-
-app.listen(port, () => { console.log("task service running on port "+ port)});
+app.listen(PORT, () => {
+  console.log(`Task service running on port ${PORT}`);
+});
