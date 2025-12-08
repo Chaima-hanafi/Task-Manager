@@ -1,12 +1,14 @@
 import tasks from "../models/taskModel.js";
+import axios from "axios";
 
 // GET all tasks
 export const getTasks = (req, res) => {
   res.json(tasks);
 };
 
-// CREATE a task
-export const createTask = (req, res) => {
+// CREATE a task 
+
+export const createTask = async (req, res) => {
   const { title, description, deadline } = req.body;
 
   const task = {
@@ -18,6 +20,18 @@ export const createTask = (req, res) => {
   };
 
   tasks.push(task);
+  try {
+    await axios.post("http://localhost:4002/notify", {
+      event: "TASK_CREATED",
+      data: {
+        taskId: task.id,
+        title: task.title
+      }
+    });
+    console.log("Notif envoyée ✔️");
+  } catch (err) {
+    console.error("Erreur en envoyant la notification ❌", err.message);
+  }
   res.status(201).json(task);
 };
 

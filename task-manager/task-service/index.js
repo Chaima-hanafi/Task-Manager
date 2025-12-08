@@ -1,9 +1,11 @@
 import express from "express";
 import bodyParser from "body-parser";
 import taskRoutes from "./routes/taskRoutes.js";
+import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
-const PORT = 4001;
+const PORT = process.env.PORT;
 app.use(bodyParser.json());
 app.use(express.json());
 
