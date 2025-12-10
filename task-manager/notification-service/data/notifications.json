@@ -28,5 +28,15 @@
     },
     "read": false,
     "createdAt": "2025-12-10T22:08:44.913Z"
+  },
+  {
+    "id": 1765407385018,
+    "event": "TASK_CREATED",
+    "data": {
+      "taskId": 1765407384958,
+      "title": "Chi hajaZEZYZX"
+    },
+    "read": false,
+    "createdAt": "2025-12-10T22:56:25.018Z"
   }
 ]
