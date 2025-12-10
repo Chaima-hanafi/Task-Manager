@@ -5,7 +5,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4001;  // ← Ajoute une valeur par défaut
+
 app.use(bodyParser.json());
 app.use(express.json());
 
@@ -13,5 +14,5 @@ app.use(express.json());
 app.use("/tasks", taskRoutes);
 
 app.listen(PORT, () => {
-  console.log(`✅Task service running on port ${PORT}`);
+  console.log(`✅ Task service running on port ${PORT}`);
 });

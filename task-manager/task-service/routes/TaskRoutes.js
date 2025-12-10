@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { tasks } from "../models/taskModel.js";  // ← Importe tasks pour la route debug
 import {
   getTasks,
   createTask,
@@ -8,6 +9,19 @@ import {
 } from "../controllers/taskController.js";
 
 const router = Router();
+
+// Route de debug (optionnelle)
+router.get("/debug", (req, res) => {
+  console.log("🔍 Route /debug appelée");
+  console.log("📦 tasks =", tasks);
+  console.log("🔢 tasks.length =", tasks.length);
+
+  res.json({
+    message: "Info de debug",
+    tasksLength: tasks.length,
+    tasks: tasks
+  });
+});
 
 router.get("/", getTasks);
 router.post("/", createTask);
