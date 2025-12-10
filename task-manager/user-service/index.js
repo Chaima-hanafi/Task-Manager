@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT;
+const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -16,5 +16,4 @@ app.get("/test", (req, res) => res.send("Test route OK ✅"));
 
 app.use("/api/users", userRoutes);
 
-const PORT = 4000;
-app.listen(port, () => console.log(`✅ User-Service running on port ${PORT}`));
+app.listen(PORT, () => console.log(`✅ User-Service running on port ${PORT}`));
