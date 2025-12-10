@@ -1,4 +1,4 @@
-import tasks from "../models/taskModel.js";
+import {tasks} from "../models/taskModel.js";
 import axios from "axios";
 
 // GET all tasks
@@ -9,6 +9,7 @@ export const getTasks = (req, res) => {
 // CREATE a task 
 
 export const createTask = async (req, res) => {
+
   const { title, description, deadline } = req.body;
 
   const task = {

@@ -1,3 +1,1 @@
-let notifications = [];
-
-export default notifications;
+export const notifications = [];
