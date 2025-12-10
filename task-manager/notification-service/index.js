@@ -16,5 +16,5 @@ app.use(bodyParser.json());
 app.use("/notify", notificationRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Notification service running on port ${PORT}`);
+  console.log(`✅Notification service running on port ${PORT}`);
 });
