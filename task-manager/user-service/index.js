@@ -1,19 +1,24 @@
 import express from "express";
-import bodyParser from "body-parser";
+import cors from "cors";
+import dotenv from "dotenv";
 import userRoutes from "./routes/userRoutes.js";
-import dotenv from 'dotenv';
 
 dotenv.config();
+
+// ✅ Initialiser Express AVANT d'utiliser app.use
 const app = express();
-const PORT = process.env.PORT;
 
+// Middleware
+app.use(cors({
+  origin: "http://localhost:5173" // autorise ton frontend
+}));
 app.use(express.json());
-app.use(bodyParser.json());
-// Route test simple
-app.get("/test", (req, res) => res.send("Test route OK ✅"));
 
-// Routes utilisatpostmaneurs (optionnel pour l’instant)
-
+// Routes
 app.use("/api/users", userRoutes);
 
-app.listen(PORT, () => console.log(`✅ User-Service running on port ${PORT}`));
+// Port
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`✅ User-Service running on port ${PORT}`);
+});

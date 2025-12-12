@@ -1,11 +1,18 @@
 import express from "express";
-import { registerUser, loginUser, deleteUser } from "../controllers/userController.js";
+import { registerUser, loginUser, deleteUser, getUsers } from "../controllers/userController.js";
 
 const router = express.Router();
 
-// Routes
+// ✅ Lister tous les utilisateurs
+router.get("/", getUsers);
+
+// ✅ Inscription
 router.post("/register", registerUser);
+
+// ✅ Connexion
 router.post("/login", loginUser);
+
+// ✅ Suppression
 router.delete("/delete", deleteUser);
 
 export default router;
