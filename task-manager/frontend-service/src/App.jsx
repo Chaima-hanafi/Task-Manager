@@ -1,30 +1,17 @@
-import { useState } from 'react';
+import { Outlet, Link } from "react-router-dom";
 
-
-import './App.css'
-
-function App() {
-  async function fetchTasks() {
-    try {
-      const response = await fetch('http://localhost:4001/task');
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      console.log(data);
-      return data;
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  }
-
+export default function App() {
   return (
     <div>
-      <p>This project is presented by Ayoub and Chaima </p>
-    </div>
-  )
-}
+      <nav style={{ padding: 20, background: "#f2f2f2" }}>
+        <Link to="/">Home</Link> |{" "}
+        <Link to="/tasks">Tasks</Link> |{" "}
+        <Link to="/notifications">Notifications</Link>
+      </nav>
 
-export default App;
+      <div style={{ padding: 20 }}>
+        <Outlet />
+      </div>
+    </div>
+  );
+}
