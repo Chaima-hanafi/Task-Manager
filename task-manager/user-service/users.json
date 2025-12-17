@@ -13,5 +13,35 @@
     "id": "0bc86c0d-c485-4d97-8144-27089661d1dd",
     "email": "fman9383@gmail.com",
     "password": "$2b$10$QzFEtxM6eGaY9VVRjJielOT7w1LyYfcq7Ax7KZyKmUcDAoadfx.6e"
+  },
+  {
+    "id": "92ad184e-ac56-4d4f-bd42-5436e7f01195",
+    "email": "ah7@gmail.com",
+    "password": "$2b$10$5G8h0EV89vPmRPoybveToeDrIf0u7l47CWC5RJStqiyxOpX/oDype"
+  },
+  {
+    "id": "5ba899a8-244a-4c2e-9f3a-355acee68f38",
+    "email": "chaimahn@exemple.com",
+    "password": "$2b$10$lGwa1ausqwHRiyId9xPyRO4Rr8F2mpfpGvbKTCvrOqKlwnXrR1kUy"
+  },
+  {
+    "id": "3cbdd7e7-d795-4c52-be37-2762abcde0ab",
+    "email": "chaimaelhanafi66@gmail.com",
+    "password": "$2b$10$0u4vTMlecNYFf1DD74t8pOz9wVaz28UAX68SrVPH6ygIHfLILBZay"
+  },
+  {
+    "id": "4f27a78b-b7be-4a17-b524-de22e509e6c2",
+    "email": "ayoub@gmail.com",
+    "password": "$2b$10$k0xFNBJ.CPoOyMDOb1vt..sNTqWi4QloB62MXKMlqcNin3QqCuWOa"
+  },
+  {
+    "id": "169816d4-15c2-4577-9ed7-c67d3e83b325",
+    "email": "ezzesdsd@gmail.com",
+    "password": "$2b$10$S6p5YAuKOGHakytnddmIj.y2xU.uzdj6XkkwSy9FaAh9ly.OYhTwu"
+  },
+  {
+    "id": "53b62238-702e-44c6-8804-fff4dcf844de",
+    "email": "ayoub7math@gmail.com",
+    "password": "$2b$10$qaIrExnr/TnuvOJeO9SGAuBxDHF8F25fwq5wDNWaNsGyb0fNAwd9y"
   }
 ]
