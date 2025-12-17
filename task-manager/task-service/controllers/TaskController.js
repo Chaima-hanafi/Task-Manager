@@ -59,6 +59,7 @@ export const getTasks = (req, res) => {
 };
 
 // CREATE a task
+const NOTIFICATION_IP = process.env.NOTIFICATION_IP;
 export const createTask = async (req, res) => {
   console.log("\n=== CREATE TASK ===");
   console.log("➕ Body reçu:", req.body);
@@ -89,7 +90,7 @@ export const createTask = async (req, res) => {
 
   // Envoyer notification
   try {
-    await axios.post("http://localhost:4002/notify", {
+    await axios.post(`http://${NOTIFICATION_IP}:4002/notify`, {
       event: "TASK_CREATED",
       data: {
         taskId: task.id,

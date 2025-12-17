@@ -10,7 +10,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: "http://localhost:5173" // autorise ton frontend
+  origin: `http://${process.env.FRONTEND_IP}:5173` // autorise ton frontend
 }));
 app.use(express.json());
 
@@ -22,3 +22,10 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`✅ User-Service running on port ${PORT}`);
 });
+
+
+/*
+  9ra o zed 9ra 
+  o
+  ma3ndnach m3a lkoussala
+*/

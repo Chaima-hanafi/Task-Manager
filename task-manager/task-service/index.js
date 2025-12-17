@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import taskRoutes from "./routes/taskRoutes.js";
+import taskRoutes from "./routes/TaskRoutes.js";
 import dotenv from 'dotenv';
 import cors from "cors";
 
@@ -12,7 +12,7 @@ const PORT = process.env.PORT;
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors({
-  origin: "http://localhost:5173"
+  origin: `http://${process.env.FRONTEND_IP}:5173`
 }));
 
 // Routes
