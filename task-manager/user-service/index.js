@@ -10,7 +10,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: "http://localhost:5173" // autorise ton frontend
+  origin: `http://${process.env.FRONTEND_IP}:5173` // autorise ton frontend
 }));
 app.use(express.json());
 
