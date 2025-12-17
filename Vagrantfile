@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
     vm3.vm.hostname = "frontend-server"
     vm3.vm.network "private_network", ip: "10.10.10.14"
     vm3.vm.provider "virtualbox" do |vb|
-      vb.name = "vm3"
+      vb.name = "vm4"
       vb.memory = 1024
       vb.cpus = 2
     end
