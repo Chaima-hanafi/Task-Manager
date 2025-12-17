@@ -34,5 +34,14 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
   end
+  config.vm.define "frontend_server" do |vm4|
+    vm4.vm.hostname = "frontend-server"
+    vm4.vm.network "private_network", ip: "10.10.10.14"
+    vm4.vm.provider "virtualbox" do |vb|
+      vb.name = "vm4"
+      vb.memory = 1024
+      vb.cpus = 2
+    end
+  end
 end
 
