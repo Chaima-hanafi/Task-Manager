@@ -20,7 +20,6 @@ sudo npm install -g nodemon >> /dev/null
 sudo touch .env
 sudo cat <<EOF > .env
 PORT=4002
-TASKSERVICE_IP=10.10.10.12
 EOF
 ### End of config
 ### Start the user-service 

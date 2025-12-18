@@ -5,7 +5,7 @@ import {
   getTaskById,
   updateTask,
   deleteTask
-} from "../controllers/taskController.js";
+} from "../controllers/TaskController.js";
 
 const router = Router();
 router.get("/debug", (req, res) => {

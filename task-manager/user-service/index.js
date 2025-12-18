@@ -9,8 +9,9 @@ dotenv.config();
 const app = express();
 
 // Middleware
+const FRONTEND_IP = process.env.FRONTEND_IP
 app.use(cors({
-  origin: `http://${process.env.FRONTEND_IP}:5173` // autorise ton frontend
+  origin: `http://${FRONTEND_IP}:5173` // autorise ton frontend
 }));
 app.use(express.json());
 
