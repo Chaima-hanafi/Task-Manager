@@ -1,28 +1,35 @@
+#!/bin/bash
 
- Update the package list
+# Update package list
 sudo apt update
 
-#  Install curl 
-sudo apt install -y curl
+# Install curl and git
+sudo apt install -y curl git
 
- Download and execute the official script to set up Node.js 1
+# Setup Node.js 18
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 
- Install Node.js and np
+# Install Node.js and npm
 sudo apt install -y nodejs
 
- Clone the project from GitHu
-git clone https://github.com/Chaima-hanafi/Task-Manager.git
-cd Task-Manager/task-manager
+# Clone the project (specific branch)
+git clone -b chaima_branch https://github.com/Chaima-hanafi/Task-Manager.git
 
- Install project dependencie
+# Go to project directory
+cd Task-Manager/task-manager 
+
+# Keep only notification service
+rm -rf frontend-service user-service task-service
+
+# Go to notification directory
+cd notification-service 
+
+# Install notification dependencies
 npm install
-
- Remove services that are not needed on this V
-rm -rf task-service notification-service frontend-service
+# set up environment variables for task service
 sudo touch .env
-cat <<EOF > .env
+sudo cat <<EOF > .env
 PORT=4002
 EOF
-
-echo "Setup completed. .env file created and project ready."
+# Start notification service
+nohup node index.js > index.log 2>&1 &
