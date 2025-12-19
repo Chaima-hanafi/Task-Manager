@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import './App.css';
 
 // Configuration de l'API
-const API_URL = 'http://localhost:4001';
-const USER_API_URL = 'http://localhost:4000/api/users';
+const API_URL = 'http://NOTIFICATION_IP:4001';
+const USER_API_URL = 'http://USER_IP:4000/api/users';
 
 function App() {
   // États pour l'authentification
