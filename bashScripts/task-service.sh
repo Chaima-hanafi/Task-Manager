@@ -1,3 +1,4 @@
+#!/bin/bash
 ### Install necessary packages 
 sudo apt update >> /dev/null && apt install -y git curl build-essential >> /dev/null
 sudo echo "git , curl and build-essential installed"
@@ -9,9 +10,9 @@ VERSION=`node -v`
 sudo echo "$VERSION installed"
 ### Clone for repository 
 sudo git clone -b Ayoub_Branch  https://github.com/Chaima-hanafi/Task-Manager.git 
-PWD= $(pwd)
-sudo rm -rf $PWD/Task-Manager/task-manager/user-service/ $PWD/Task-Manager/task-manager/notification-service/ $PWD/Task-Manager/task-manager/frontend-service/
-sudo cd $PWD/Task-Manager/task-manager/task-service
+PWD=$(pwd)
+sudo rm -rf "$PWD/Task-Manager/task-manager/user-service/"  "$PWD/Task-Manager/task-manager/notification-service/" "$PWD/Task-Manager/task-manager/frontend-service/"
+cd "$PWD/Task-Manager/task-manager/task-service"
 ### install node packages 
 sudo npm install -y >> /dev/null
 sudo echo "node packages installed" 
@@ -24,6 +25,5 @@ FRONTEND_IP=10.10.10.14
 NOTIFICATION_IP=10.10.10.13
 EOF
 ### End of config
-### Start the user-service 
-sudo nodemon index.js
-
+### Start the task-service 
+sudo nohup nodemon index.js > task-service.log 2>&1 &

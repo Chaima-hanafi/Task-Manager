@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ### Install necessary packages 
 sudo apt update >> /dev/null && apt install -y git curl build-essential >> /dev/null
 sudo echo "git , curl and build-essential installed"
@@ -9,9 +11,9 @@ VERSION=`node -v`
 sudo echo "$VERSION installed"
 ### Clone for repository 
 sudo git clone -b Ayoub_Branch  https://github.com/Chaima-hanafi/Task-Manager.git 
-PWD= $(pwd)
-sudo rm -rf $PWD/Task-Manager/task-manager/user-service/ $PWD/Task-Manager/task-manager/user-service/ $PWD/Task-Manager/task-manager/frontend-service/
-sudo cd $PWD/Task-Manager/task-manager/notification-service
+PWD=$(pwd)
+sudo rm -rf "$PWD/Task-Manager/task-manager/user-service/" "$PWD/Task-Manager/task-manager/user-service/" "$PWD/Task-Manager/task-manager/frontend-service/"
+cd "$PWD/Task-Manager/task-manager/notification-service"
 ### install node packages 
 sudo npm install -y >> /dev/null
 sudo echo "node packages installed" 
@@ -22,6 +24,7 @@ sudo cat <<EOF > .env
 PORT=4002
 EOF
 ### End of config
-### Start the user-service 
-sudo nodemon index.js
+### Start the notification-service 7
+
+sudo nohup nodemon index.js > notification-service.log 2>&1 &
 
