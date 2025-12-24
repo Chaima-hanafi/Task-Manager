@@ -12,6 +12,8 @@ Vagrant.configure("2") do |config|
       vb.memory = 1024
       vb.cpus = 2
     end
+    vm1.vm.provision "shell", path: "bashScripts/user-service.sh"
+
   end
 
   # VM 2
@@ -23,6 +25,8 @@ Vagrant.configure("2") do |config|
       vb.memory = 1024
       vb.cpus = 2
     end
+    vm2.vm.provision "shell", path: "bashScripts/task-service.sh"
+
   end
 
   # VM 3
@@ -34,15 +38,19 @@ Vagrant.configure("2") do |config|
       vb.memory = 1024
       vb.cpus = 2
     end
+    vm3.vm.provision "shell", path: "bashScripts/notification-service.sh"
+
   end
-  config.vm.define "frontend_server" do |vm3|
-    vm3.vm.hostname = "frontend-server"
-    vm3.vm.network "private_network", ip: "10.10.10.14"
-    vm3.vm.provider "virtualbox" do |vb|
+  config.vm.define "frontend_server" do |vm4|
+    vm4.vm.hostname = "frontend-server"
+    vm4.vm.network "private_network", ip: "10.10.10.14"
+    vm4.vm.provider "virtualbox" do |vb|
       vb.name = "vm4"
       vb.memory = 1024
       vb.cpus = 2
     end
+    vm4.vm.provision "shell", path: "bashScripts/frontend.sh"
+
   end
 end
 

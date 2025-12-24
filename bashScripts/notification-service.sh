@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Update package list
-sudo apt update
+sudo apt update 
 
 # Install curl and git
 sudo apt install -y curl git

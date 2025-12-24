@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Update package list
-sudo apt update
+sudo apt update 
 
 # Install curl and git
 sudo apt install -y curl git
@@ -16,7 +16,7 @@ sudo apt install -y nodejs
 git clone -b Ayoub_Branch https://github.com/Chaima-hanafi/Task-Manager.git
 
 # Go to project directory
-cd Task-Manager/task-manager 
+cd Task-Manager/task-manager
 
 # Keep only task service
 rm -rf notification-service user-service frontend-service
