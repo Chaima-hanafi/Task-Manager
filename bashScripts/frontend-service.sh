@@ -18,8 +18,8 @@ cd frontend-service
 npm install
 sudo touch .env
 sudo cat <<EOF > .env
-NOTIFICATION_IP=10.10.10.13
-USER_IP=10.10.10.11
+VITE_USER_IP=10.10.10.11
+VITE_TASK_IP=10.10.10.12
 EOF
 # Start frontend service accessible from Vagrant host
 npm run dev -- --host 0.0.0.0
