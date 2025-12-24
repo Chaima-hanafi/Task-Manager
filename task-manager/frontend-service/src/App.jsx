@@ -1,11 +1,10 @@
-import dotenv from 'dotenv';
 import { useState, useEffect } from 'react';
 import './App.css';
 
 dotenv.config();
 // Configuration de l'API
-const API_URL = 'http://{process.env.TASK_IP}:4001';
-const USER_API_URL = 'http://{process.env.USER_IP}:4000/api/users';
+const API_URL = `http://${import.meta.env.TASK_IP}:4001`;
+const USER_API_URL = `http://${import.meta.env.USER_IP}:4000/api/users`;
 
 function App() {
   // États pour l'authentification

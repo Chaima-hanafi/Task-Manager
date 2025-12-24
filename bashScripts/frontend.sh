@@ -1,40 +1,25 @@
 #!/bin/bash
 
+# Update package list curl and git
+sudo apt update -y && sudo apt install -y curl git
 
-REPO_URL="https://github.com/Chaima-hanafi/Task-Manager.git"
-APP_DIR="Task-Manager/task-manager/frontend-service"
+# Setup Node.js 22
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt install -y nodejs
 
-echo "### Install necessary packages"
-sudo apt upgrade -y 
-sudo apt update -y 
-sudo apt install -y git curl build-essential
-echo "git , curl and build-essential installed"
-echo "### Install node and npm"
-sudo curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt install -y nodejs 
-sudo echo "node and npm successfuly installed"
-VERSION=`node -v`
-echo "      ### $VERSION of nodejs installed"
-echo "      ### Clone for repository"
-
-if [ ! -d "$APP_DIR" ]; then
-  git clone "$REPO_URL"
-else
-  echo "Directory $APP_DIR already exists, skipping clone"
-fi
-
-cd "$APP_DIR" 
-
-# ===== CREATE .env FILE =====
-cat <<EOF > .env
-TASK_IP=10.10.10.12
-USER_IP=10.10.10.11
-EOF
-
-echo ".env file created"
-
-# ===== INSTALL DEPENDENCIES =====
+# Clone the project (specific branch)
+git clone -b Ayoub_Branch https://github.com/Chaima-hanafi/Task-Manager.git
+# Go to project directory
+cd Task-Manager/task-manager
+# Keep only frontend service
+rm -rf notification-service user-service task-service
+cd frontend-service
+# Install frontend dependencies
 npm install
-
-# ===== RUN DEV SERVER =====
-nohup npm run dev &
+sudo touch .env
+sudo cat <<EOF > .env
+VITE_USER_IP=10.10.10.11
+VITE_TASK_IP=10.10.10.12
+EOF
+# Start frontend service accessible from Vagrant host
+npm run dev -- --host 0.0.0.0
