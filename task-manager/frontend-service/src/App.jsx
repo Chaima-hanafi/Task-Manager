@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 
-dotenv.config();
 // Configuration de l'API
 const API_URL = `http://${import.meta.env.VITE_TASK_IP}:4001`;
 const USER_API_URL = `http://${import.meta.env.VITE_USER_IP}:4000/api/users`;
