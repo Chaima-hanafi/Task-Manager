@@ -2,6 +2,7 @@ Vagrant.configure("2") do |config|
   # Box de base (Ubuntu ici)
   config.vm.box = "ubuntu/focal64"
   config.vm.boot_timeout = 600
+  config.ssh.insert_key = true
 
   # VM 1
   config.vm.define "user_server" do |vm1|
