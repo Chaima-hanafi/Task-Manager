@@ -13,7 +13,14 @@ Vagrant.configure("2") do |config|
       vb.memory = 1024
       vb.cpus = 2
     end
-    vm1.vm.provision "shell", path: "bashScripts/user-service.sh"
+    vm1.vm.provision "shell", inline: <<-SHELL
+      echo "Provisioning started"
+      apt update -y
+      apt install -y nodejs npm
+      apt install -y jenkins
+      node -v
+      npm -v
+    SHELL
 
   end
 
@@ -26,7 +33,14 @@ Vagrant.configure("2") do |config|
       vb.memory = 1024
       vb.cpus = 2
     end
-    vm2.vm.provision "shell", path: "bashScripts/task-service.sh"
+    vm2.vm.provision "shell", inline: <<-SHELL
+      echo "Provisioning started"
+      apt update -y
+      apt install -y nodejs npm
+      apt install -y jenkins
+      node -v
+      npm -v
+    SHELL
 
   end
 
@@ -39,7 +53,14 @@ Vagrant.configure("2") do |config|
       vb.memory = 1024
       vb.cpus = 2
     end
-    vm3.vm.provision "shell", path: "bashScripts/notification-service.sh"
+    vm3.vm.provision "shell", inline: <<-SHELL
+      echo "Provisioning started"
+      apt update -y
+      apt install -y nodejs npm
+      apt install -y jenkins
+      node -v
+      npm -v
+    SHELL
 
   end
   config.vm.define "frontend_server" do |vm4|
@@ -50,8 +71,14 @@ Vagrant.configure("2") do |config|
       vb.memory = 1024
       vb.cpus = 2
     end
-    vm4.vm.provision "shell", path: "bashScripts/frontend.sh"
+    vm4.vm.provision "shell", inline: <<-SHELL
+      echo "Provisioning started"
+      apt update -y
+      apt install -y nodejs npm
+      apt install -y jenkins
+      node -v
+      npm -v
+    SHELL
 
   end
 end
-

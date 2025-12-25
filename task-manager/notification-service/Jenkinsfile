@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'node18'
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'Ayoub_Jenkins_CICD', url: 'https://github.com/Chaima-hanafi/Task-Manager.git'
+            }
+        }
+
+        stage('Install dependencies') {
+            steps {
+                sh 'cd notification-service && npm install'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'cd notification-service && npm run build'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'cd notification-service && npm test'
+            }
+        }
+
+        stage('Deploy') {
+            steps{
+                sh ''' 
+                  cd notification-service
+                  nohup node index.js &
+                  '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build succeeded ✅'
+        }
+        failure {
+            echo 'Build failed ❌'
+        }
+    }
+}

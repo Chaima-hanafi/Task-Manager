@@ -1,0 +1,55 @@
+pipeline {
+    agent any
+    environment {
+        PORT=credentials('PORT')
+        FRONTEND_IP=credentials('FRONTEND_IP')
+    }
+
+
+    tools {
+        nodejs 'node18'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'Ayoub_Jenkins_CICD', url: 'https://github.com/Chaima-hanafi/Task-Manager.git'
+            }
+        }
+        
+        stage('Install dependencies') {
+            steps {
+                sh 'cd user-service && npm install'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'cd user-service && npm run build'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'cd user-service && npm test'
+            }
+        }
+        stage('Deploy') {
+            steps{
+                sh ''' 
+                  cd user-service
+                  nohup node index.js &
+                  '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build succeeded ✅'
+        }
+        failure {
+            echo 'Build failed ❌'
+        }
+    }
+}
