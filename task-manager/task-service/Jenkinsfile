@@ -1,6 +1,10 @@
 pipeline {
     agent any
-
+    env {
+        PORT = credentials('TASK_SERVICE_PORT')
+        FRONTEND_IP = credentials('FRONTEND_SERVICE_IP')
+        NOTIFICATION_IP = credentials('NOTIFICATION_SERVICE_IP')
+    }
     tools {
         nodejs 'node18'
     }

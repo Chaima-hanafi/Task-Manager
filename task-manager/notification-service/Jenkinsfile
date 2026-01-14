@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    env {
+        PORT = credentials('NOTIFICATION_SERVICE_PORT')
+    }
     tools {
         nodejs 'node18'
     }
@@ -12,7 +14,7 @@ pipeline {
                 git branch: 'Ayoub_Jenkins_CICD', url: 'https://github.com/Chaima-hanafi/Task-Manager.git'
             }
         }
-
+        
         stage('Install dependencies') {
             steps {
                 sh 'cd notification-service && npm install'

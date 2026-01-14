@@ -81,4 +81,22 @@ Vagrant.configure("2") do |config|
     SHELL
 
   end
+  config.vm.define "Jenkins_Master" do |vm5|
+    vm5.vm.hostname = "jenkins-master"
+    vm5.vm.network "private_network", ip: "10.10.10.10"
+    vm5.vm.provider "virtualbox" do |vb|
+      vb.name = "vm5"
+      vb.memory = 1024
+      vb.cpus = 2
+    end
+    vm5.vm.provision "shell", inline: <<-SHELL
+      echo "Provisioning started"
+      apt update -y
+      apt install -y nodejs npm
+      apt install -y jenkins
+      node -v
+      npm -v
+    SHELL
+
+  end
 end
