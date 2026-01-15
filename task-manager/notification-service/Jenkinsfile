@@ -1,52 +1,57 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'node18'
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
+        DOCKER_IMAGE = 'ayoubha/taskmanager-notificationservice'
+        IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
     stages {
 
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
-                git branch: 'Ayoub_Jenkins_CICD', url: 'https://github.com/Chaima-hanafi/Task-Manager.git'
+                checkout scm
             }
         }
 
-        stage('Install dependencies') {
+        stage('Build Docker Image') {
             steps {
-                sh 'cd notification-service && npm install'
+                script {
+                    docker.build("${DOCKER_IMAGE}:${IMAGE_TAG}")
+                }
             }
         }
 
-        stage('Build') {
+        stage('Docker Login') {
             steps {
-                sh 'cd notification-service && npm run build'
+                sh """
+                echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login \
+                -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin
+                """
             }
         }
 
-        stage('Test') {
+        stage('Push Image to Docker Hub') {
             steps {
-                sh 'cd notification-service && npm test'
-            }
-        }
-
-        stage('Deploy') {
-            steps{
-                sh ''' 
-                  cd notification-service
-                  nohup node index.js &
-                  '''
+                sh """
+                docker push ${DOCKER_IMAGE}:${IMAGE_TAG}
+                docker tag ${DOCKER_IMAGE}:${IMAGE_TAG} ${DOCKER_IMAGE}:latest
+                docker push ${DOCKER_IMAGE}:latest
+                """
             }
         }
     }
 
     post {
         success {
-            echo 'Build succeeded ✅'
+            echo "✅ Image pushed successfully to Docker Hub"
         }
         failure {
-            echo 'Build failed ❌'
+            echo "❌ Pipeline failed"
+        }
+        always {
+            sh "docker logout"
         }
     }
 }
