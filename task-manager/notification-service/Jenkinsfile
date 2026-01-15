@@ -1,54 +1,57 @@
 pipeline {
     agent any
-    env {
-        PORT = credentials('NOTIFICATION_SERVICE_PORT')
-    }
-    tools {
-        nodejs 'node18'
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
+        DOCKER_IMAGE = 'ayoubha/taskmanager-notificationservice'
+        IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
     stages {
 
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
-                git branch: 'Ayoub_Jenkins_CICD', url: 'https://github.com/Chaima-hanafi/Task-Manager.git'
-            }
-        }
-        
-        stage('Install dependencies') {
-            steps {
-                sh 'cd notification-service && npm install'
+                checkout scm
             }
         }
 
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                sh 'cd notification-service && npm run build'
+                script {
+                    docker.build("${DOCKER_IMAGE}:${IMAGE_TAG}")
+                }
             }
         }
 
-        stage('Test') {
+        stage('Docker Login') {
             steps {
-                sh 'cd notification-service && npm test'
+                sh """
+                echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login \
+                -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin
+                """
             }
         }
 
-        stage('Deploy') {
-            steps{
-                sh ''' 
-                  cd notification-service
-                  nohup node index.js &
-                  '''
+        stage('Push Image to Docker Hub') {
+            steps {
+                sh """
+                docker push ${DOCKER_IMAGE}:${IMAGE_TAG}
+                docker tag ${DOCKER_IMAGE}:${IMAGE_TAG} ${DOCKER_IMAGE}:latest
+                docker push ${DOCKER_IMAGE}:latest
+                """
             }
         }
     }
 
     post {
         success {
-            echo 'Build succeeded ✅'
+            echo "✅ Image pushed successfully to Docker Hub"
         }
         failure {
-            echo 'Build failed ❌'
+            echo "❌ Pipeline failed"
+        }
+        always {
+            sh "docker logout"
         }
     }
 }

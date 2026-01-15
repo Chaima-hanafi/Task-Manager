@@ -1,0 +1,57 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
+        DOCKER_IMAGE = 'ayoubha/taskmanager-frontend'
+        IMAGE_TAG = "${BUILD_NUMBER}"
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build("${DOCKER_IMAGE}:${IMAGE_TAG}")
+                }
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                sh """
+                echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login \
+                -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin
+                """
+            }
+        }
+
+        stage('Push Image to Docker Hub') {
+            steps {
+                sh """
+                docker push ${DOCKER_IMAGE}:${IMAGE_TAG}
+                docker tag ${DOCKER_IMAGE}:${IMAGE_TAG} ${DOCKER_IMAGE}:latest
+                docker push ${DOCKER_IMAGE}:latest
+                """
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Image pushed successfully to Docker Hub"
+        }
+        failure {
+            echo "❌ Pipeline failed"
+        }
+        always {
+            sh "docker logout"
+        }
+    }
+}
